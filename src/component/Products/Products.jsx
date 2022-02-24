@@ -1,20 +1,23 @@
 import Product from '../Product/Product';
+import Spinner from '../layout/Spinner';
 import './Products.css';
 
-function Products() {
-	return (
-		<section className="products">
-			<Product />
-			<Product />
-			<Product />
-			<Product />
-			<Product />
-			<Product />
-			<Product />
-			<Product />
-			<Product />
-		</section>
-	);
+function Products({ listProducts }) {
+	if (listProducts.length === 0) return <Spinner />;
+	else {
+		return (
+			<section className="products">
+				{listProducts.map(({ id, price, title, image }) => (
+					<Product
+						key={id}
+						title={title}
+						image={image}
+						price={price}
+					/>
+				))}
+			</section>
+		);
+	}
 }
 
 export default Products;
