@@ -13,6 +13,7 @@ function Products({ listProducts }) {
 						title={title}
 						image={image}
 						price={price}
+						id={id}
 					/>
 				))}
 			</section>
