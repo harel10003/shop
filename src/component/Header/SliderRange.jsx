@@ -17,10 +17,13 @@ function RangeSlider() {
 		updataRange,
 		setVal,
 		val,
+		minP,
+		maxP,
 	] = useContext(ShopContext);
 
 	return (
 		<Box sx={{ width: 200 }}>
+			{minP}-{maxP}
 			<Slider
 				value={val}
 				onChange={updataRange}
@@ -28,8 +31,10 @@ function RangeSlider() {
 				// getAriaLabel="filter price"
 				valueLabelDisplay="auto"
 				color="primary"
-				// min={minPrice}
-				// max={maxPrice}
+				min={0}
+				max={2000}
+				// min={minP}
+				// max={maxP}
 				//   getAriaValueText={valuetext}
 			/>
 		</Box>
