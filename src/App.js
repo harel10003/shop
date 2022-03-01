@@ -9,7 +9,7 @@ import SliderRange from './component/Header/SliderRange';
 
 function App() {
 	const [minPrice, setMinPrice] = useState(0);
-	const [maxPrice, setMaxPrice] = useState(10000);
+	const [maxPrice, setMaxPrice] = useState(2000);
 	const [productsList, setProductsList] = useState([]);
 	const [pLMinMax, setPLMinMax] = useState([productsList]);
 	const [filteredList, setFilterdList] = useState(pLMinMax);
@@ -23,6 +23,7 @@ function App() {
 			.then((products) => {
 				setProductsList(products);
 				setFilterdList(products);
+				PriceCheck();
 			});
 	}, []);
 
@@ -35,6 +36,7 @@ function App() {
 		setVal(data);
 		setMinPrice(val[0]);
 		setMaxPrice(val[1]);
+		console.log(data);
 		filterCategory(catgoryNow);
 	};
 	const [catgoryNow, setCatgoryNow] = useState('all');
@@ -58,26 +60,19 @@ function App() {
 		}
 	};
 
-	// let minPrice = 100;
-	// let maxPrice = 120;
+	let maxP = 0;
+	let minP = 0;
 
-	// 	const PriceCheck = () => {
-	// 		productsList.forEach((p) => {
-	// 			if (maxPrice < p.price) maxPrice = p.price;
-	// 			if (minPrice > p.price) minPrice = p.price;
-	// 		});
-	// 	};
-	// const maxP=100000;
-	// 	const maxPrice =()=>productsList.forEach((p) => {
-	// 		if (maxP <= p.price) maxP = p.price
-	// 		console.log(maxPrice);
-	// 		})
-
-	// let minP=0
-	// 	const minPrice =()=> productsList.forEach((p) => {
-	// 		if (minPrice < p.price) maxPrice = p.price
-	// 		console.log(maxPrice);
-	// 	};
+	const PriceCheck = () => {
+		productsList.forEach((p) => {
+			if (maxP <= p.price) {
+				maxP = p.price;
+			}
+			if (minP >= p.price) {
+				minP = p.price;
+			}
+		});
+	};
 
 	return (
 		<ShopContext.Provider
@@ -92,6 +87,8 @@ function App() {
 				updataRange,
 				setVal,
 				val,
+				minP,
+				maxP,
 			]}
 		>
 			<div className="App">
