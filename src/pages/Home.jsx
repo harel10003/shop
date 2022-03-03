@@ -31,7 +31,7 @@ function Home() {
 		<div>
 			<div
 				className="home"
-				style={{ display: 'flex', 'justify-content': 'space-between' }}
+				style={{ display: 'flex', justifyContent: 'space-between' }}
 			>
 				{/* {minPrice}-{maxPrice}-{catgoryNow} */}
 				<SliderRange />

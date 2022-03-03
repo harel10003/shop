@@ -47,7 +47,7 @@ function ProductDetails() {
 					</Typography>
 					<Typography variant="body2" color="text.secondary">
 						{product.description}
-						<h2
+						<p
 							style={{
 								textAlign: 'center',
 								fontSize: '20px',
@@ -55,7 +55,7 @@ function ProductDetails() {
 							}}
 						>
 							{product.price}$
-						</h2>
+						</p>
 					</Typography>
 				</CardContent>
 
