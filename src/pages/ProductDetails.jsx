@@ -8,8 +8,11 @@ import CardMedia from '@mui/material/CardMedia';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import OrderProduct from '../component/Product/OrderProduct';
+import Box from '@mui/material/Box';
+import Rating from '@mui/material/Rating';
 
 function ProductDetails() {
+	const [value, setValue] = useState(0);
 	const { id } = useParams();
 	const [product, setProduct] = useState([]);
 	// const inputRef = useRef(null);
@@ -23,7 +26,13 @@ function ProductDetails() {
 	}, [id]);
 
 	return (
-		<div style={{ display: 'flex', justifyContent: 'center' }}>
+		<div
+			style={{
+				display: 'flex',
+				justifyContent: 'center',
+				backgroundImage: 'url({product.image})',
+			}}
+		>
 			<Card sx={{ maxWidth: 345 }}>
 				<CardMedia
 					component="img"
@@ -73,9 +82,61 @@ function ProductDetails() {
 
 					{/* <Button size="small">Learn More</Button> */}
 				</CardActions>
+				{/* <Box
+					sx={{
+						'& > legend': { mt: 2 },
+					}}
+				>
+					<Typography component="legend">Rating</Typography>
+					<Rating
+						name="read-only"
+						value={value}
+						onChange={(event, newValue) => {
+							setValue({});
+						}}
+					/>
+					<Typography component="legend">Read only</Typography>
+					<Rating name="read-only" value={value} readOnly />
+					<Typography component="legend">Disabled</Typography>
+					<Rating name="disabled" value={value} disabled />
+					<Typography component="legend">No rating given</Typography>
+					<Rating name="no-value" value={null} />
+				</Box> */}
 			</Card>
 		</div>
 	);
 }
 
 export default ProductDetails;
+
+// import * as React from 'react';
+// import Box from '@mui/material/Box';
+// import Rating from '@mui/material/Rating';
+// import Typography from '@mui/material/Typography';
+
+// export default function BasicRating() {
+//   const [value, setValue] = React.useState(2);
+
+//   return (
+//     <Box
+//       sx={{
+//         '& > legend': { mt: 2 },
+//       }}
+//     >
+//       <Typography component="legend">Controlled</Typography>
+//       <Rating
+//         name="simple-controlled"
+//         value={value}
+//         onChange={(event, newValue) => {
+//           setValue(newValue);
+//         }}
+//       />
+//       <Typography component="legend">Read only</Typography>
+//       <Rating name="read-only" value={value} readOnly />
+//       <Typography component="legend">Disabled</Typography>
+//       <Rating name="disabled" value={value} disabled />
+//       <Typography component="legend">No rating given</Typography>
+//       <Rating name="no-value" value={null} />
+//     </Box>
+//   );
+// }
