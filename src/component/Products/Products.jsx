@@ -3,21 +3,20 @@ import Spinner from '../layout/Spinner';
 import './Products.css';
 
 function Products({ listProducts }) {
-	if (listProducts.length === 0) return <Spinner />;
+	const list = listProducts;
+	if (list.length === 0) return <Spinner />;
 	else {
-		return (
-			<section className="products">
-				{listProducts.map(({ id, price, title, image }) => (
-					<Product
-						key={id}
-						title={title}
-						image={image}
-						price={price}
-						id={id}
-					/>
-				))}
-			</section>
-		);
+		const renderProducts = () =>
+			listProducts.map(({ id, price, title, image }, index) => (
+				<Product
+					key={`${id}_${index}`}
+					title={title}
+					image={image}
+					price={price}
+					id={id}
+				/>
+			));
+		return <section className="products">{renderProducts()}</section>;
 	}
 }
 

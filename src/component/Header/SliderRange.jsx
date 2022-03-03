@@ -3,7 +3,8 @@ import Box from '@mui/material/Box';
 import Slider from '@mui/material/Slider';
 import { useContext, useState } from 'react';
 import ShopContext from '../context/ShopConetext';
-
+// import Alert from '@mui/material/Alert';
+// import Stack from '@mui/material/Stack';
 function RangeSlider() {
 	// debugger;
 	const [
@@ -22,8 +23,7 @@ function RangeSlider() {
 	] = useContext(ShopContext);
 
 	return (
-		<Box sx={{ width: 200 }}>
-			{minP}-{maxP}
+		<Box sx={{ width: '150px' }}>
 			<Slider
 				value={val}
 				onChange={updataRange}

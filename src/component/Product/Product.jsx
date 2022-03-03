@@ -1,29 +1,99 @@
 import './Product.css';
 import { AiOutlineMinus, AiOutlinePlus } from 'react-icons/ai';
 import { useContext } from 'react';
+import { Link } from 'react-router-dom';
 import ShopContext from '../context/ShopConetext';
+import OrderProduct from './OrderProduct';
+import { Button } from '@mui/material';
+import * as React from 'react';
+import Card from '@mui/material/Card';
+import CardActions from '@mui/material/CardActions';
+import CardContent from '@mui/material/CardContent';
+import CardMedia from '@mui/material/CardMedia';
+
+import Typography from '@mui/material/Typography';
 
 function Product({ image, title, price, id }) {
-	const [cartList, setCartlist] = useContext(ShopContext);
-
-	let showMinus = () => {
-		if (cartList.includes(id) === true) return 'inline';
-		else return 'none';
-	};
-	const removeProduct = (id) =>
-		setCartlist(
-			cartList.filter((p, index) => cartList.indexOf(id) !== index)
-		);
+	const [
+		cartList,
+		setCartlist,
+		productsList,
+		minPrice,
+		setMinPrice,
+		maxPrice,
+		setMaxPrice,
+		updataRange,
+		setVal,
+		val,
+		minP,
+		maxP,
+		thisProduct,
+		sumTotal,
+		TotalPrice,
+		catgoryNow,
+		filteredList,
+		showMinus,
+		removeProduct,
+	] = useContext(ShopContext);
 
 	return (
 		<div className="product-card">
-			<div className="product-image">
+			<Card sx={{ maxWidth: 345 }}>
+				<CardMedia
+					component="img"
+					height="200"
+					image={image}
+					alt={title}
+				/>
+				<CardContent>
+					<Typography
+						gutterBottom
+						variant="h6"
+						component="div"
+						style={{ fontSize: '14px' }}
+					>
+						{title}
+					</Typography>
+				</CardContent>
+				<CardActions>
+					<OrderProduct
+						image={image}
+						title={title}
+						price={price}
+						id={id}
+					/>
+					<Button variant="text">
+						<Link
+							to={`/productid/${id}`}
+							style={{ color: 'gray', textDecoration: 'none' }}
+						>
+							more details
+						</Link>
+					</Button>
+				</CardActions>
+			</Card>
+
+			{/* <div className="product-image">
 				<img src={image} alt="{title}" />
 			</div>
-			<div className="product-info">
+			<div
+				className="product-info"
+				style={{
+					display: 'flex',
+					flexDirection: 'column',
+					alignContent: 'space-around',
+					justifyContent: 'space-evenly',
+					alignItems: 'center',
+				}}
+			>
 				<h5>{title}</h5>
-
-				<div>
+				<OrderProduct
+					image={image}
+					title={title}
+					price={price}
+					id={id}
+				/> */}
+			{/* <div>
 					<AiOutlinePlus
 						onClick={() => {
 							setCartlist([id, ...cartList]);
@@ -38,8 +108,16 @@ function Product({ image, title, price, id }) {
 							removeProduct(id);
 						}}
 					/>
-				</div>
-			</div>
+				</div> */}
+			{/* <Button variant="text">
+					<Link
+						to={`/productid/${id}`}
+						style={{ color: 'gray', textDecoration: 'none' }}
+					>
+						more details
+					</Link>
+				</Button>
+			</div> */}
 		</div>
 	);
 }
