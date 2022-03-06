@@ -14,21 +14,22 @@ import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
-import IconCart from '../cart/IconCart';
-import { Link } from 'react-router-dom';
+import useMediaQuery from '@mui/material/useMediaQuery';
+import { useTheme } from '@mui/material/styles';
+import { withRouter } from 'react-router-dom';
 import { Drawer } from '@mui/material';
 import DrawerCart from '../drawer/DrawerCart';
+import { handleBreakpoints } from '@mui/system';
 
-// const pages = [
-// 	{ name: 'Home', link: '/' },
-// 	{ name: 'About', link: '/about' },
-// ];
 const pages = ['Home', 'About'];
 const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
 
-function Header() {
-	const [anchorElNav, setAnchorElNav] = React.useState(null);
-	const [anchorElUser, setAnchorElUser] = React.useState(null);
+function Header(props) {
+	const { history } = props;
+	const [anchorElNav, setAnchorElNav] = useState(null);
+	const [anchorElUser, setAnchorElUser] = useState(null);
+	const theme = useTheme();
+	const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
 
 	const handleOpenNavMenu = (event) => {
 		setAnchorElNav(event.currentTarget);
@@ -37,7 +38,12 @@ function Header() {
 		setAnchorElUser(event.currentTarget);
 	};
 
-	const handleCloseNavMenu = () => {
+	const handleMenuClick = (page) => {
+		if (page === 'About') {
+			history.push('about');
+		} else {
+			history.push('/');
+		}
 		setAnchorElNav(null);
 	};
 
@@ -71,63 +77,89 @@ function Header() {
 
 	return (
 		<nav className="product-filter" style={{ position: 'relative' }}>
-			<AppBar position="static">
+			<AppBar
+				position="fixed"
+				style={{ background: 'white', color: 'black' }}
+			>
 				<Container maxWidth="xl">
 					<Toolbar disableGutters>
-						<Typography
-							variant="h6"
-							noWrap
-							component="div"
-							sx={{ mr: 2, display: { xs: 'none', md: 'flex' } }}
-						>
-							LOGO
-						</Typography>
-
 						<Box
 							sx={{
 								flexGrow: 1,
-								display: { xs: 'flex', md: 'none' },
+								display: { xs: 'flex', md: 'flex' },
 							}}
 						>
-							<IconButton
-								size="large"
-								aria-label="account of current user"
-								aria-controls="menu-appbar"
-								aria-haspopup="true"
-								onClick={handleOpenNavMenu}
-								color="inherit"
-							>
-								<MenuIcon />
-							</IconButton>
-							<Menu
-								id="menu-appbar"
-								anchorEl={anchorElNav}
-								anchorOrigin={{
-									vertical: 'bottom',
-									horizontal: 'left',
-								}}
-								keepMounted
-								transformOrigin={{
-									vertical: 'top',
-									horizontal: 'left',
-								}}
-								open={Boolean(anchorElNav)}
-								onClose={handleCloseNavMenu}
-								sx={{
-									display: { xs: 'block', md: 'none' },
-								}}
-							>
-								{pages.map((page, index) => (
-									<MenuItem
-										key={index}
-										onClick={handleCloseNavMenu}
+							{isMobile ? (
+								<>
+									<IconButton
+										size="large"
+										aria-label="account of current user"
+										aria-controls="menu-appbar"
+										aria-haspopup="true"
+										onClick={handleOpenNavMenu}
+										color="inherit"
 									>
-										<Typography textAlign="center">
-											{page}
-										</Typography>
-									</MenuItem>
-								))}
-							</Menu>
+										<MenuIcon />
+									</IconButton>
+
+									<Menu
+										id="menu-appbar"
+										anchorEl={anchorElNav}
+										anchorOrigin={{
+											vertical: 'bottom',
+											horizontal: 'left',
+										}}
+										keepMounted
+										transformOrigin={{
+											vertical: 'top',
+											horizontal: 'left',
+										}}
+										open={Boolean(anchorElNav)}
+										onClose={() => anchorElNav(null)}
+										sx={{
+											display: {
+												xs: 'block',
+												md: 'flex',
+											},
+										}}
+									>
+										{pages.map((page, index) => (
+											<MenuItem key={index}>
+												<Typography
+													textAlign="center"
+													onClick={() =>
+														handleMenuClick(page)
+													}
+												>
+													{page}
+												</Typography>
+											</MenuItem>
+										))}
+									</Menu>
+								</>
+							) : (
+								<IconButton
+									size="large"
+									aria-label="account of current user"
+									aria-controls="menu-appbar"
+									aria-haspopup="true"
+									onClick={handleOpenNavMenu}
+									color="inherit"
+								>
+									{pages.map((page, index) => (
+										<MenuItem key={index}>
+											<Typography
+												textAlign="center"
+												onClick={() =>
+													handleMenuClick(page)
+												}
+											>
+												{page}
+											</Typography>
+										</MenuItem>
+									))}
+								</IconButton>
+							)}
 						</Box>
 						<Typography
 							variant="h6"
@@ -135,7 +167,7 @@ function Header() {
 							component="div"
 							sx={{
 								flexGrow: 1,
-								display: { xs: 'flex', md: 'none' },
+								display: { xs: 'flex', md: 'flex' },
 							}}
 						>
 							Shop Store
@@ -149,7 +181,7 @@ function Header() {
 							{pages.map((page) => (
 								<Button
 									key={page}
-									onClick={handleCloseNavMenu}
+									onClick={() => handleMenuClick(page)}
 									sx={{
 										my: 2,
 										color: 'white',
@@ -211,4 +243,4 @@ function Header() {
 		</nav>
 	);
 }
-export default Header;
+export default withRouter(Header);

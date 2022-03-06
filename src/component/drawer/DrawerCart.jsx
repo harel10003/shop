@@ -88,37 +88,38 @@ function DrawerCart() {
 		</Box>
 	);
 
-	if (cartList.length === 0) {
-		return (
-			<Stack sx={{ width: '100%' }} spacing={2}>
-				<Alert
-					severity="info"
-					style={{ width: '200px', flexDirection: 'row-reverse' }}
-				>
-					your cart is empty
-				</Alert>
-			</Stack>
-		);
-	} else
-		return (
-			<div>
-				{['right'].map((anchor) => (
-					<React.Fragment key={anchor}>
-						<Button onClick={toggleDrawer(anchor, true)}>
-							<IconCart />
-						</Button>
-						<Drawer
-							anchor={anchor}
-							open={state[anchor]}
-							onClose={toggleDrawer(anchor, false)}
-						>
-							{/* {list(anchor)} */}
-							<Cart />
-						</Drawer>
-					</React.Fragment>
-				))}
-			</div>
-		);
+	// if (cartList.length === 0) {
+	// 	return (
+	// 		<Stack sx={{ width: '100%' }} spacing={2}>
+	// 			<Alert
+	// 				severity="info"
+	// 				style={{ width: '200px', flexDirection: 'row-reverse' }}
+	// 			>
+	// 				your cart is empty
+	// 			</Alert>
+	// 		</Stack>
+	// 	);
+	// } else
+	return (
+		<div>
+			{['right'].map((anchor) => (
+				<React.Fragment key={anchor}>
+					<Button onClick={toggleDrawer(anchor, true)}>
+						<IconCart />
+						{/*problem*/}
+					</Button>
+					<Drawer
+						anchor={anchor}
+						open={state[anchor]}
+						onClose={toggleDrawer(anchor, false)}
+					>
+						{/* {list(anchor)} */}
+						<Cart />
+					</Drawer>
+				</React.Fragment>
+			))}
+		</div>
+	);
 }
 
 export default DrawerCart;

@@ -4,6 +4,7 @@ import shopContext from '../context/ShopConetext';
 import Button from '@mui/material/Button';
 import ButtonGroup from '@mui/material/ButtonGroup';
 import Box from '@mui/material/Box';
+import AddCircleIcon from '@mui/icons-material/AddCircle';
 
 function OrderProduct({ image, title, price, id }) {
 	const [
@@ -42,15 +43,31 @@ function OrderProduct({ image, title, price, id }) {
 				}}
 			>
 				<ButtonGroup variant="text" aria-label="text button group">
+					<AddCircleIcon
+						sx={{ fontSize: 40, color: 'secondary' }}
+						onClick={() => {
+							setCartlist([id, ...cartList]);
+						}}
+						style={{
+							cursor: 'pointer',
+							display:
+								showMinus(id) === 'none' ? 'inline' : 'none',
+						}}
+					/>
 					<Button>
 						<AiOutlinePlus
 							onClick={() => {
 								setCartlist([id, ...cartList]);
 							}}
-							style={{ cursor: 'pointer', display: 'inline' }}
+							style={{
+								cursor: 'pointer',
+								display: showMinus(id),
+							}}
 						/>
 					</Button>
-					<Button style={{ cursor: 'default' }}>
+					<Button
+						style={{ cursor: 'default', display: showMinus(id) }}
+					>
 						{count(id).length}
 					</Button>
 					<Button>
