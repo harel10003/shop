@@ -4,7 +4,7 @@ import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
 import { CardMedia } from '@mui/material';
-import ProductDetails from '../../pages/ProductDetails';
+import { Description } from '@mui/icons-material';
 
 const style = {
 	position: 'absolute',
@@ -45,14 +45,19 @@ function Popup({ id, image, title }) {
 						id="modal-modal-title"
 						variant="h6"
 						component="h2"
+						style={{
+							display: 'flex',
+							flexDirection: 'column',
+						}}
 					>
-						<img src={image} alt={title} height="200" />
+						<img src={image} alt={title} height="400" />
 						<br />
 						{title}
 					</Typography>
-					<Typography id="modal-modal-description" sx={{ mt: 2 }}>
-						<ProductDetails />
-					</Typography>
+					<Typography
+						id="modal-modal-description"
+						sx={{ mt: 2 }}
+					></Typography>
 				</Box>
 			</Modal>
 		</div>

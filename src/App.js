@@ -21,7 +21,6 @@ function App() {
 	const [cartList, setCartlist] = useState([]);
 	useEffect(() => {
 		setProductsList([]);
-
 		// inputRef.current.focus();
 		fetch('https://fakestoreapi.com/products')
 			.then((res) => {
