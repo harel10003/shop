@@ -4,7 +4,9 @@ import './Products.css';
 
 function Products({ listProducts }) {
 	const list = listProducts;
-	if (list.length === 0) return <Spinner />;
+
+	// if (list.length === 0) return <Spinner />;
+	if (list[0].title === undefined || list.length === 0) return <Spinner />;
 	else {
 		const renderProducts = () =>
 			listProducts.map(({ id, price, title, image }, index) => (

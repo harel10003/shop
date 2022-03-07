@@ -13,6 +13,8 @@ import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
 import AOS from 'aos';
 import 'aos/dist/aos.css';
+import { Category } from '@mui/icons-material';
+import Popup from './Popup';
 
 function Product({ image, title, price, id }) {
 	useEffect(() => {
@@ -43,13 +45,15 @@ function Product({ image, title, price, id }) {
 
 	return (
 		<div className="product-card" data-aos="flip-left">
-			<Card sx={{ maxWidth: 345, height: 400 }}>
-				<CardMedia
+			<Card sx={{ maxWidth: 345 }}>
+				{/* <CardMedia
 					component="img"
 					height="200"
 					image={image}
 					alt={title}
-				/>
+				
+				/> */}
+				<Popup id={id} image={image} title={title} />
 				<CardContent>
 					<Typography
 						gutterBottom
@@ -76,6 +80,16 @@ function Product({ image, title, price, id }) {
 						</Link>
 					</Button>
 				</CardActions>
+
+				<div
+					style={{
+						display: 'flex',
+						justifyContent: 'space-between',
+						margin: '0 7% 7% 7%',
+					}}
+				>
+					<h3>{price}$</h3> {thisProduct(id).category}
+				</div>
 			</Card>
 		</div>
 	);

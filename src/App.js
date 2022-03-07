@@ -9,6 +9,7 @@ import ProductDetails from './pages/ProductDetails';
 import Spinner from './component/layout/Spinner';
 import Home from './pages/Home';
 import About from './pages/About';
+
 import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
 
 function App() {
@@ -19,9 +20,9 @@ function App() {
 	const [filteredList, setFilterdList] = useState(pLMinMax);
 	const [cartList, setCartlist] = useState([]);
 	useEffect(() => {
-		// if (productsList.length === 0) <Spinner />;
+		setProductsList([]);
+
 		// inputRef.current.focus();
-		// else
 		fetch('https://fakestoreapi.com/products')
 			.then((res) => {
 				return res.json();
