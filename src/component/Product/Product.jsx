@@ -59,7 +59,7 @@ function Product({ image, title, price, id }) {
 						gutterBottom
 						variant="h6"
 						component="div"
-						style={{ fontSize: '14px' }}
+						style={{ fontSize: '14px', height: '40px' }}
 					>
 						{title}
 					</Typography>
@@ -84,6 +84,7 @@ function Product({ image, title, price, id }) {
 				<div
 					style={{
 						display: 'flex',
+						alignItems: 'center',
 						justifyContent: 'space-between',
 						margin: '0 7% 7% 7%',
 					}}
