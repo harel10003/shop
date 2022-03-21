@@ -9,13 +9,13 @@ function Products({ listProducts }) {
 	if (list[0].title === undefined || list.length === 0) return <Spinner />;
 	else {
 		const renderProducts = () =>
-			listProducts.map(({ id, price, title, image }, index) => (
+			listProducts.map(({ _id, price, title, image }, index) => (
 				<Product
-					key={`${id}_${index}`}
+					key={`${_id}_${index}`}
 					title={title}
 					image={image}
 					price={price}
-					id={id}
+					_id={_id}
 				/>
 			));
 		return <section className="products">{renderProducts()}</section>;

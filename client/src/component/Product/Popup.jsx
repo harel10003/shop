@@ -18,7 +18,7 @@ const style = {
 	p: 4,
 };
 
-function Popup({ id, image, title }) {
+function Popup({ _id, image, title }) {
 	const [open, setOpen] = React.useState(false);
 	const handleOpen = () => setOpen(true);
 	const handleClose = () => setOpen(false);
@@ -42,7 +42,7 @@ function Popup({ id, image, title }) {
 			>
 				<Box sx={style}>
 					<Typography
-						id="modal-modal-title"
+						_id="modal-modal-title"
 						variant="h6"
 						component="h2"
 						style={{
@@ -55,7 +55,7 @@ function Popup({ id, image, title }) {
 						{title}
 					</Typography>
 					<Typography
-						id="modal-modal-description"
+						_id="modal-modal-description"
 						sx={{ mt: 2 }}
 					></Typography>
 				</Box>

@@ -1,12 +1,11 @@
 import './App.css';
-import Header from './component/Header/Header';
-import Products from './component/Products/Products';
+import Header from '../src/component/Header/Header';
+
 import { useEffect, useState } from 'react';
 import ShopContext from '../src/component/context/ShopConetext';
-import SliderRange from './component/Header/SliderRange';
-import DrawerCart from './component/drawer/DrawerCart';
+
 import ProductDetails from './pages/ProductDetails';
-import Spinner from './component/layout/Spinner';
+
 import Home from './pages/Home';
 import About from './pages/About';
 
@@ -22,7 +21,7 @@ function App() {
 	useEffect(() => {
 		setProductsList([]);
 		// inputRef.current.focus();
-		fetch('https://fakestoreapi.com/products')
+		fetch('/api/products')
 			.then((res) => {
 				return res.json();
 			})
@@ -33,13 +32,13 @@ function App() {
 			});
 	}, []);
 
-	let showMinus = (id) => {
-		if (cartList.includes(id) === true) return 'inline';
+	let showMinus = (_id) => {
+		if (cartList.includes(_id) === true) return 'inline';
 		else return 'none';
 	};
-	const removeProduct = (id) =>
+	const removeProduct = (_id) =>
 		setCartlist(
-			cartList.filter((p, index) => cartList.indexOf(id) !== index)
+			cartList.filter((p, index) => cartList.indexOf(_id) !== index)
 		);
 
 	const categories = productsList
@@ -88,7 +87,7 @@ function App() {
 		});
 	};
 
-	const thisProduct = (id) => productsList.filter((p) => p.id === id)[0];
+	const thisProduct = (_id) => productsList.filter((p) => p._id === _id)[0];
 	let sumTotal = 0;
 	const TotalPrice = () => {
 		// debugger;
@@ -132,7 +131,7 @@ function App() {
 					<br />
 
 					<Switch>
-						<Route path="/productid/:id">
+						<Route path="/products/:_id">
 							<ProductDetails />
 						</Route>
 						<Route path="/about">

@@ -38,7 +38,7 @@ function Cart() {
 	] = useContext(ShopContext);
 
 	const cartIndex = cartList
-		.map((id) => id)
+		.map((_id) => _id)
 		.filter((value, index, array) => array.indexOf(value) === index);
 
 	const count = (item) => cartList.filter((p) => p === item);
@@ -107,7 +107,7 @@ function Cart() {
 										image={thisProduct(item).image}
 										title={thisProduct(item).title}
 										price={thisProduct(item).price}
-										id={thisProduct(item).id}
+										_id={thisProduct(item)._id}
 									/>
 								</div>
 							</div>

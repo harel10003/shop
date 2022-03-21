@@ -103,7 +103,7 @@ function Header(props) {
 									</IconButton>
 
 									<Menu
-										id="menu-appbar"
+										_id="menu-appbar"
 										anchorEl={anchorElNav}
 										anchorOrigin={{
 											vertical: 'bottom',
@@ -211,7 +211,7 @@ function Header(props) {
 							</Tooltip>
 							<Menu
 								sx={{ mt: '45px' }}
-								id="menu-appbar"
+								_id="menu-appbar"
 								anchorEl={anchorElUser}
 								anchorOrigin={{
 									vertical: 'top',

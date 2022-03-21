@@ -16,7 +16,7 @@ import 'aos/dist/aos.css';
 import { Category } from '@mui/icons-material';
 import Popup from './Popup';
 
-function Product({ image, title, price, id }) {
+function Product({ image, title, price, _id }) {
 	useEffect(() => {
 		AOS.init();
 	}, []);
@@ -53,7 +53,7 @@ function Product({ image, title, price, id }) {
 					alt={title}
 				
 				/> */}
-				<Popup id={id} image={image} title={title} />
+				<Popup _id={_id} image={image} title={title} />
 				<CardContent>
 					<Typography
 						gutterBottom
@@ -69,11 +69,11 @@ function Product({ image, title, price, id }) {
 						image={image}
 						title={title}
 						price={price}
-						id={id}
+						_id={_id}
 					/>
 					<Button variant="text">
 						<Link
-							to={`/productid/${id}`}
+							to={`/products/${_id}`}
 							style={{ color: 'gray', textDecoration: 'none' }}
 						>
 							more details
@@ -89,7 +89,7 @@ function Product({ image, title, price, id }) {
 						margin: '0 7% 7% 7%',
 					}}
 				>
-					<h3>{price}$</h3> {thisProduct(id).category}
+					<h3>{price}$</h3> {thisProduct(_id).category}
 				</div>
 			</Card>
 		</div>

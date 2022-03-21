@@ -14,18 +14,16 @@ import Spinner from '../component/layout/Spinner';
 
 function ProductDetails() {
 	const [value, setValue] = useState(0);
-	const { id } = useParams();
+	const { _id } = useParams();
 	const [product, setProduct] = useState([]);
 	// const inputRef = useRef(null);
 	// if (inputRef && inputRef.current) inputRef.current.focus();
 
 	useEffect(() => {
-		console.log(product);
-
-		fetch(`https://fakestoreapi.com/products/${id}`)
+		fetch(`/api/products/${_id}`)
 			.then((res) => res.json())
 			.then((p) => setProduct(p));
-	}, [id]);
+	}, [_id]);
 
 	if (product.title === undefined) return <Spinner />;
 	else {
@@ -73,7 +71,7 @@ function ProductDetails() {
 							image={product.image}
 							title={product.title}
 							price={product.price}
-							id={product.id}
+							_id={product._id}
 						/>
 						<Button size="small" variant="outlined">
 							<Link
