@@ -85,6 +85,8 @@ function App() {
 		});
 	};
 
+	const includesStr = (str) =>
+		productsList.filter((p) => p.title.toLowerCase().includes(str));
 	const thisProduct = (_id) => productsList.filter((p) => p._id === _id)[0];
 	let sumTotal = 0;
 	const TotalPrice = () => {
@@ -121,6 +123,7 @@ function App() {
 				removeProduct,
 				categories,
 				filterCategory,
+				includesStr,
 			}}
 		>
 			<Router>

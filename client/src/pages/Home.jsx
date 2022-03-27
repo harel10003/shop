@@ -9,6 +9,8 @@ import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 
 import { useContext, useEffect, useState } from 'react';
+// import { Search } from '@mui/icons-material';
+import ColorTextFields from '../component/Header/ColorTextFields';
 
 function Home() {
 	const [category, setCategory] = useState('all');
@@ -27,7 +29,12 @@ function Home() {
 				}}
 			>
 				{/* {minPrice}-{maxPrice}-{catgoryNow} */}
-				<SliderRange />
+				<div style={{ padding: '15px 0 0 0' }}>
+					<SliderRange />
+				</div>
+				<div style={{ padding: '15px 0 0 0' }}>
+					<ColorTextFields />
+				</div>
 
 				<Box sx={{ minWidth: 150 }}>
 					<FormControl fullWidth>

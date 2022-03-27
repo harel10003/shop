@@ -15,6 +15,7 @@ import Alert from '@mui/material/Alert';
 import Stack from '@mui/material/Stack';
 import shopContext from '../context/ShopConetext';
 import IconCart from '../cart/IconCart';
+import { FaMoneyBillWaveAlt } from 'react-icons/fa';
 
 function DrawerCart() {
 	const [state, setState] = useState({
@@ -117,10 +118,24 @@ function DrawerCart() {
 							x
 						</button>
 						<Cart />
-						<div>
-							total payment:{TotalPrice().toFixed(2)}${' '}
-							<button>pay now</button>
+						<div
+							style={{
+								display: 'flex',
+								flexDirection: 'row',
+								justifyContent: ' space-around',
+								margin: 30,
+							}}
+						>
+							<FaMoneyBillWaveAlt />
+							<div>total payment</div>
+							<div>{TotalPrice().toFixed(2)}$</div>
 						</div>
+						<Button
+							style={{ margin: ' 0 30px' }}
+							variant="contained"
+						>
+							Your Cart
+						</Button>
 					</Drawer>
 				</React.Fragment>
 			))}

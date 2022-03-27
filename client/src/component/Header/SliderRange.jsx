@@ -23,7 +23,7 @@ function RangeSlider() {
 				// min={minP}
 				// max={maxP}
 				//   getAriaValueText={valuetext}
-				style={{ zIndex: '1' }}
+				style={{ color: 'gray' }}
 			/>
 		</Box>
 	);
