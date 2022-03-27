@@ -23,25 +23,8 @@ function DrawerCart() {
 		// bottom: false,
 		right: false,
 	});
-	const [
-		cartList,
-		setCartlist,
-		productsList,
-		minPrice,
-		setMinPrice,
-		maxPrice,
-		setMaxPrice,
-		updataRange,
-		setVal,
-		val,
-		minP,
-		maxP,
-		thisProduct,
-		sumTotal,
-		TotalPrice,
-		catgoryNow,
-		filteredList,
-	] = useContext(shopContext);
+
+	const { TotalPrice } = useContext(shopContext);
 	const toggleDrawer = (anchor, open) => (event) => {
 		if (
 			event.type === 'keydown' &&
@@ -53,40 +36,40 @@ function DrawerCart() {
 		setState({ ...state, [anchor]: open });
 	};
 
-	const list = (anchor) => (
-		<Box
-			sx={{
-				width: anchor === 'top' || anchor === 'bottom' ? 'auto' : 250,
-			}}
-			role="presentation"
-			onClick={toggleDrawer(anchor, false)}
-			onKeyDown={toggleDrawer(anchor, false)}
-		>
-			<List>
-				{['Inbox', 'Starred', 'Send email', 'Drafts'].map(
-					(text, index) => (
-						<ListItem button key={text}>
-							<ListItemIcon>
-								{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-							</ListItemIcon>
-							<ListItemText primary={text} />
-						</ListItem>
-					)
-				)}
-			</List>
-			<Divider />
-			<List>
-				{['All mail', 'Trash', 'Spam'].map((text, index) => (
-					<ListItem button key={text}>
-						<ListItemIcon>
-							{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-						</ListItemIcon>
-						<ListItemText primary={text} />
-					</ListItem>
-				))}
-			</List>
-		</Box>
-	);
+	// const list = (anchor) => (
+	// 	<Box
+	// 		sx={{
+	// 			width: anchor === 'top' || anchor === 'bottom' ? 'auto' : 250,
+	// 		}}
+	// 		role="presentation"
+	// 		onClick={toggleDrawer(anchor, false)}
+	// 		onKeyDown={toggleDrawer(anchor, false)}
+	// 	>
+	// 		<List>
+	// 			{['Inbox', 'Starred', 'Send email', 'Drafts'].map(
+	// 				(text, index) => (
+	// 					<ListItem button key={text}>
+	// 						<ListItemIcon>
+	// 							{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
+	// 						</ListItemIcon>
+	// 						<ListItemText primary={text} />
+	// 					</ListItem>
+	// 				)
+	// 			)}
+	// 		</List>
+	// 		<Divider />
+	// 		<List>
+	// 			{['All mail', 'Trash', 'Spam'].map((text, index) => (
+	// 				<ListItem button key={text}>
+	// 					<ListItemIcon>
+	// 						{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
+	// 					</ListItemIcon>
+	// 					<ListItemText primary={text} />
+	// 				</ListItem>
+	// 			))}
+	// 		</List>
+	// 	</Box>
+	// );
 
 	// if (cartList.length === 0) {
 	// 	return (
@@ -105,8 +88,10 @@ function DrawerCart() {
 			{['right'].map((anchor) => (
 				<React.Fragment key={anchor}>
 					<Button onClick={toggleDrawer(anchor, true)}>
-						<IconCart />
+						{/* <div onClick={toggleDrawer(anchor, true)}> */}
+						{/* </div> */}
 						{/*problem*/}
+						<IconCart />
 					</Button>
 					<Drawer
 						anchor={anchor}
@@ -114,7 +99,28 @@ function DrawerCart() {
 						onClose={toggleDrawer(anchor, false)}
 					>
 						{/* {list(anchor)} */}
+
+						<div style={{ margin: ' 15px auto', fontSize: '35px' }}>
+							My Cart
+						</div>
+						<button
+							style={{
+								position: 'fixed',
+								top: 20,
+								right: 20,
+								fontSize: 20,
+								borderRadius: '50%',
+								border: 'none',
+							}}
+							onClick={toggleDrawer(anchor, false)}
+						>
+							x
+						</button>
 						<Cart />
+						<div>
+							total payment:{TotalPrice().toFixed(2)}${' '}
+							<button>pay now</button>
+						</div>
 					</Drawer>
 				</React.Fragment>
 			))}

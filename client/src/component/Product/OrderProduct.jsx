@@ -7,27 +7,8 @@ import Box from '@mui/material/Box';
 import AddCircleIcon from '@mui/icons-material/AddCircle';
 
 function OrderProduct({ image, title, price, _id }) {
-	const [
-		cartList,
-		setCartlist,
-		productsList,
-		minPrice,
-		setMinPrice,
-		maxPrice,
-		setMaxPrice,
-		updataRange,
-		setVal,
-		val,
-		minP,
-		maxP,
-		thisProduct,
-		sumTotal,
-		TotalPrice,
-		catgoryNow,
-		filteredList,
-		showMinus,
-		removeProduct,
-	] = useContext(shopContext);
+	const { cartList, setCartlist, showMinus, removeProduct } =
+		useContext(shopContext);
 	const count = (item) => cartList.filter((p) => p === item);
 	return (
 		<div style={{ margin: '10px 0 0 0 ' }}>

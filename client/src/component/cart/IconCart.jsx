@@ -6,23 +6,7 @@ import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import shopContext from '../context/ShopConetext';
 
 function IconCart() {
-	const [
-		cartList,
-		setCartlist,
-		productsList,
-		minPrice,
-		setMinPrice,
-		maxPrice,
-		setMaxPrice,
-		updataRange,
-		setVal,
-		val,
-		minP,
-		maxP,
-		thisProduct,
-		sumTotal,
-		TotalPrice,
-	] = React.useContext(shopContext);
+	const { cartList } = React.useContext(shopContext);
 	const StyledBadge = styled(Badge)(({ theme }) => ({
 		'& .MuiBadge-badge': {
 			right: -1,

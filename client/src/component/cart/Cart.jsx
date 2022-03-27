@@ -8,6 +8,15 @@ import Badge from '@mui/material/Badge';
 import { styled } from '@mui/material/styles';
 import IconButton from '@mui/material/IconButton';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
+import { useTheme } from '@mui/material/styles';
+import Box from '@mui/material/Box';
+import Card from '@mui/material/Card';
+import CardContent from '@mui/material/CardContent';
+import CardMedia from '@mui/material/CardMedia';
+import Typography from '@mui/material/Typography';
+import SkipPreviousIcon from '@mui/icons-material/SkipPrevious';
+import PlayArrowIcon from '@mui/icons-material/PlayArrow';
+import SkipNextIcon from '@mui/icons-material/SkipNext';
 
 const StyledBadge = styled(Badge)(({ theme }) => ({
 	'& .MuiBadge-badge': {
@@ -19,23 +28,14 @@ const StyledBadge = styled(Badge)(({ theme }) => ({
 }));
 
 function Cart() {
-	const [
+	const theme = useTheme();
+	const {
 		cartList,
-		setCartlist,
-		productsList,
-		minPrice,
-		setMinPrice,
-		maxPrice,
-		setMaxPrice,
-		updataRange,
-		setVal,
-		val,
-		minP,
-		maxP,
+
 		thisProduct,
-		sumTotal,
+
 		TotalPrice,
-	] = useContext(ShopContext);
+	} = useContext(ShopContext);
 
 	const cartIndex = cartList
 		.map((_id) => _id)
@@ -50,72 +50,103 @@ function Cart() {
 	// };
 
 	return (
-		<div>
-			{/* <AiOutlineShoppingCart />
-			{cartList.length} */}
-			<div style={{ display: 'inline', margin: ' 0 10px' }}>
-				{TotalPrice()}$
-			</div>
-			<IconButton aria-label="cart">
-				<StyledBadge badgeContent={cartList.length} color="secondary">
-					<ShoppingCartIcon />
-				</StyledBadge>
-			</IconButton>
-			<ul>
-				{cartIndex.map((item, index) => {
-					return (
-						<li key={item}>
+		<ul>
+			{cartIndex.map((item, index) => {
+				return (
+					<li
+						key={item}
+						style={{
+							margin: '10px',
+							boxShadow:
+								'0 10px 20px rgb(0, 0, 0, 0.1), 0 6px 6px rgba(0, 0, 0, 0.1)',
+						}}
+					>
+						<div
+							style={{
+								position: 'relative',
+								display: 'flex',
+								flexDirection: 'row',
+								// border: '1px solid #f6f6f6',
+								borderRadius: '10px',
+								margin: '10px',
+								padding: '10px',
+								// background: 'wh',
+								color: 'gray',
+							}}
+						>
 							<div
 								style={{
-									display: 'flex',
-									flexDirection: 'row',
-									border: '1px solid #f6f6f6',
-									borderRadius: '10px',
-									margin: '10px',
-									padding: '10px',
-									background: 'gray',
-									color: 'white',
+									fontSize: 18,
+									maxWidth: 100,
+								}}
+							>
+								{thisProduct(item).title}
+							</div>
+							<div className="leftimg" style={{ padding: '5px' }}>
+								<img
+									src={thisProduct(item).image}
+									alt={thisProduct(item).title}
+									style={{
+										width: 50,
+										borderRadius: '10px',
+									}}
+								/>
+							</div>
+							<div
+								className="righinfo"
+								style={{
+									padding: '5px',
 								}}
 							>
 								<div
-									className="leftimg"
-									style={{ padding: '5px' }}
+									style={{
+										alignDontent: 'space-around',
+										justifycontent: ' center',
+										flexDirection: 'column',
+									}}
 								>
-									<img
-										src={thisProduct(item).image}
-										alt={thisProduct(item).title}
+									<div
 										style={{
-											width: '100px',
-											borderRadius: '10px',
+											// position: 'absolute',
+											// bottom: '50px',
+											// right: '0px',
+											padding: '0 30px',
+											fontSize: '20px',
 										}}
-									/>
-								</div>
-								<div
-									className="righinfo"
-									style={{ padding: '5px' }}
-								>
-									<span>{thisProduct(item).title}</span>
-
-									<span>
-										{count(item).length *
-											thisProduct(item).price +
-											'$'}
-									</span>
-									<div>{count(item).length + ' units'}</div>
-
-									<OrderProduct
-										image={thisProduct(item).image}
-										title={thisProduct(item).title}
-										price={thisProduct(item).price}
-										_id={thisProduct(item)._id}
-									/>
+									>
+										{thisProduct(item).price + '$'}
+									</div>
+									{/* <span
+										style={{
+											position: 'absolute',
+											top: '50px',
+										}}
+									>
+										{count(item).length + ' units'}
+									</span> */}
+									<div
+										style={
+											{
+												// position: 'absolute',
+												// bottom: 0,
+												// left: 100,
+											}
+										}
+									>
+										<OrderProduct
+											image={thisProduct(item).image}
+											title={thisProduct(item).title}
+											price={thisProduct(item).price}
+											_id={thisProduct(item)._id}
+										/>
+									</div>
 								</div>
 							</div>
-						</li>
-					);
-				})}
-			</ul>
-		</div>
+						</div>
+					</li>
+				);
+			})}
+		</ul>
 	);
 }
 

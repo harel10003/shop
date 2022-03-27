@@ -11,9 +11,10 @@ const style = {
 	top: '50%',
 	left: '50%',
 	transform: 'translate(-50%, -50%)',
-	width: 400,
+	width: 300,
 	bgcolor: 'background.paper',
-	border: '2px solid #000',
+	border: 'none',
+	borderRadius: '10px',
 	boxShadow: 24,
 	p: 4,
 };
@@ -45,19 +46,32 @@ function Popup({ _id, image, title }) {
 						_id="modal-modal-title"
 						variant="h6"
 						component="h2"
-						style={{
-							display: 'flex',
-							flexDirection: 'column',
-						}}
 					>
-						<img src={image} alt={title} height="400" />
+						<img src={image} alt={title} width="300" />
 						<br />
 						{title}
 					</Typography>
 					<Typography
 						_id="modal-modal-description"
-						sx={{ mt: 2 }}
+						sx={{ mt: 0 }}
 					></Typography>
+					<button
+						onClick={handleClose}
+						style={{
+							position: 'absolute',
+							top: 10,
+							right: 10,
+							borderRadius: '50%',
+							border: 'none',
+							// backgroundColor: 'gray',
+							color: 'gray',
+							padding: '4px',
+							fontSize: '20px',
+							cursor: 'pointer',
+						}}
+					>
+						x
+					</button>
 				</Box>
 			</Modal>
 		</div>

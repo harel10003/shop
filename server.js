@@ -7,9 +7,9 @@ const app = express();
 require('dotenv').config();
 
 app.use(express.json());
-app.use(express.static('client/build'));
+app.use(express.static('client/build')); //כל קובץ יגיע מכאן
 // const res = require('express/lib/response');
-//לשנות הרייטניג במיקס
+
 const productSchema = new mongoose.Schema({
 	title: String,
 	price: Number,

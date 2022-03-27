@@ -21,27 +21,7 @@ function Product({ image, title, price, _id }) {
 		AOS.init();
 	}, []);
 
-	const [
-		cartList,
-		setCartlist,
-		productsList,
-		minPrice,
-		setMinPrice,
-		maxPrice,
-		setMaxPrice,
-		updataRange,
-		setVal,
-		val,
-		minP,
-		maxP,
-		thisProduct,
-		sumTotal,
-		TotalPrice,
-		catgoryNow,
-		filteredList,
-		showMinus,
-		removeProduct,
-	] = useContext(ShopContext);
+	const { thisProduct } = useContext(ShopContext);
 
 	return (
 		<div className="product-card" data-aos="flip-left">

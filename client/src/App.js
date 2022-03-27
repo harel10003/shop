@@ -1,13 +1,11 @@
 import './App.css';
 import Header from '../src/component/Header/Header';
-
 import { useEffect, useState } from 'react';
 import ShopContext from '../src/component/context/ShopConetext';
-
 import ProductDetails from './pages/ProductDetails';
-
 import Home from './pages/Home';
 import About from './pages/About';
+import Admin from './pages/Admin';
 
 import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
 
@@ -101,7 +99,7 @@ function App() {
 
 	return (
 		<ShopContext.Provider
-			value={[
+			value={{
 				cartList,
 				setCartlist,
 				productsList,
@@ -123,7 +121,7 @@ function App() {
 				removeProduct,
 				categories,
 				filterCategory,
-			]}
+			}}
 		>
 			<Router>
 				<div className="App">
@@ -135,10 +133,18 @@ function App() {
 							<ProductDetails />
 						</Route>
 						<Route path="/about">
-							<About />
+							<About
+								productsList={productsList}
+								setProductsList={setProductsList}
+								setFilterdList={setFilterdList}
+								PriceCheck={PriceCheck}
+							/>
 						</Route>
 						<Route path="/">
 							<Home />
+						</Route>
+						<Route path="/admin">
+							<Admin />
 						</Route>
 					</Switch>
 				</div>

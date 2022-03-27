@@ -7,20 +7,7 @@ import ShopContext from '../context/ShopConetext';
 // import Stack from '@mui/material/Stack';
 function RangeSlider() {
 	// debugger;
-	const [
-		cartList,
-		setCartlist,
-		productsList,
-		minPrice,
-		setMinPrice,
-		maxPrice,
-		setMaxPrice,
-		updataRange,
-		setVal,
-		val,
-		minP,
-		maxP,
-	] = useContext(ShopContext);
+	const { updataRange, val } = useContext(ShopContext);
 
 	return (
 		<Box sx={{ width: '150px' }}>

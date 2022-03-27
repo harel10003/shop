@@ -20,8 +20,9 @@ import { withRouter } from 'react-router-dom';
 import { Drawer } from '@mui/material';
 import DrawerCart from '../drawer/DrawerCart';
 import { handleBreakpoints } from '@mui/system';
+import IconCart from '../cart/IconCart';
 
-const pages = ['Home', 'About'];
+const pages = ['Home', 'About', 'admin'];
 const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
 
 function Header(props) {
@@ -41,6 +42,8 @@ function Header(props) {
 	const handleMenuClick = (page) => {
 		if (page === 'About') {
 			history.push('about');
+		} else if (page === 'admin') {
+			history.push('admin');
 		} else {
 			history.push('/');
 		}
@@ -51,29 +54,7 @@ function Header(props) {
 		setAnchorElUser(null);
 	};
 
-	const [
-		cartList,
-		setCartlist,
-		productsList,
-		minPrice,
-		setMinPrice,
-		maxPrice,
-		setMaxPrice,
-		updataRange,
-		setVal,
-		val,
-		minP,
-		maxP,
-		thisProduct,
-		sumTotal,
-		TotalPrice,
-		catgoryNow,
-		filteredList,
-		showMinus,
-		removeProduct,
-		categories,
-		filterCategory,
-	] = useContext(ShopContext);
+	const { TotalPrice } = useContext(ShopContext);
 
 	return (
 		<nav className="product-filter" style={{ position: 'relative' }}>
@@ -193,9 +174,10 @@ function Header(props) {
 							))}
 						</Box>
 
-						<div style={{ margin: '10px', display: 'inline' }}>
+						<div style={{ display: 'inline' }}>
 							{TotalPrice().toFixed(2)}$
 						</div>
+
 						<DrawerCart />
 						<Box sx={{ flexGrow: 0 }}>
 							<Tooltip title="Open settings">
