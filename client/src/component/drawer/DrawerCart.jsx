@@ -25,7 +25,7 @@ function DrawerCart() {
 		right: false,
 	});
 
-	const { TotalPrice } = useContext(shopContext);
+	const { TotalPrice, cartList } = useContext(shopContext);
 	const toggleDrawer = (anchor, open) => (event) => {
 		if (
 			event.type === 'keydown' &&
@@ -85,15 +85,12 @@ function DrawerCart() {
 	// 	);
 	// } else
 	return (
-		<div>
+		<div style={{ display: cartList.length === 0 ? 'none' : 'block' }}>
 			{['right'].map((anchor) => (
 				<React.Fragment key={anchor}>
-					<Button onClick={toggleDrawer(anchor, true)}>
-						{/* <div onClick={toggleDrawer(anchor, true)}> */}
-						{/* </div> */}
-						{/*problem*/}
+					<div onClick={toggleDrawer(anchor, true)}>
 						<IconCart />
-					</Button>
+					</div>
 					<Drawer
 						anchor={anchor}
 						open={state[anchor]}

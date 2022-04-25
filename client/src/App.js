@@ -7,14 +7,14 @@ import Home from './pages/Home';
 import About from './pages/About';
 import Admin from './pages/Admin';
 
-import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
-
+// import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 function App() {
 	const [minPrice, setMinPrice] = useState(0);
 	const [maxPrice, setMaxPrice] = useState(2000);
 	const [productsList, setProductsList] = useState([]);
 	const [pLMinMax, setPLMinMax] = useState([productsList]);
-	const [filteredList, setFilterdList] = useState(pLMinMax);
+	const [filteredList, setFilterdList] = useState([pLMinMax]);
 	const [cartList, setCartlist] = useState([]);
 	useEffect(() => {
 		setProductsList([]);
@@ -26,10 +26,16 @@ function App() {
 			.then((products) => {
 				setProductsList(products);
 				setFilterdList(products);
-				PriceCheck();
+				// PriceCheck();
 			});
 	}, []);
+	//רשימה מסוננת של המחירים לצורך הסינון
+	const arrsort = productsList.map((p) => p.price).sort();
 
+	// const [maxP, setMaxP] = useState(10000);
+	// const [minP, setMinP] = useState(0);
+
+	// console.log(arrsort);
 	let showMinus = (_id) => {
 		if (cartList.includes(_id) === true) return 'inline';
 		else return 'none';
@@ -46,8 +52,10 @@ function App() {
 	const [val, setVal] = useState([minPrice, maxPrice]);
 	const updataRange = (e, data) => {
 		setVal(data);
-		setMinPrice(val[0]);
-		setMaxPrice(val[1]);
+		setMinPrice(arrsort[0]);
+		setMaxPrice(arrsort[arrsort.length - 1]);
+		// setMinPrice(val[0]);
+		// setMaxPrice(val[1]);
 		filterCategory(catgoryNow);
 	};
 	const [catgoryNow, setCatgoryNow] = useState('all');
@@ -71,26 +79,22 @@ function App() {
 		}
 	};
 
-	const [maxP, setMaxP] = useState(0);
-	const [minP, setMinP] = useState(1000000);
-
-	const PriceCheck = () => {
-		productsList.forEach((p) => {
-			if (maxP <= p.price) {
-				setMaxP(p.price);
-			}
-			if (minP >= p.price) {
-				setMinP(p.price);
-			}
-		});
-	};
+	// const PriceCheck = () => {
+	// 	productsList.forEach((p) => {
+	// 		if (maxP <= p.price) {
+	// 			setMaxP(p.price);
+	// 		}
+	// 		if (minP >= p.price) {
+	// 			setMinP(p.price);
+	// 		}
+	// 	});
+	// };
 
 	const includesStr = (str) =>
 		productsList.filter((p) => p.title.toLowerCase().includes(str));
 	const thisProduct = (_id) => productsList.filter((p) => p._id === _id)[0];
 	let sumTotal = 0;
 	const TotalPrice = () => {
-		// debugger;
 		sumTotal = 0;
 		cartList.forEach((p) => {
 			sumTotal += thisProduct(p).price;
@@ -105,6 +109,7 @@ function App() {
 				cartList,
 				setCartlist,
 				productsList,
+				setProductsList,
 				minPrice,
 				setMinPrice,
 				maxPrice,
@@ -112,8 +117,7 @@ function App() {
 				updataRange,
 				setVal,
 				val,
-				minP,
-				maxP,
+				setFilterdList,
 				thisProduct,
 				sumTotal,
 				TotalPrice,
@@ -126,32 +130,32 @@ function App() {
 				includesStr,
 			}}
 		>
-			<Router>
-				<div className="App">
+			<div className="App">
+				<Router>
 					<Header />
 					<br />
 
-					<Switch>
-						<Route path="/products/:_id">
-							<ProductDetails />
-						</Route>
-						<Route path="/about">
-							<About
-								productsList={productsList}
-								setProductsList={setProductsList}
-								setFilterdList={setFilterdList}
-								PriceCheck={PriceCheck}
-							/>
-						</Route>
-						<Route path="/">
-							<Home />
-						</Route>
-						<Route path="/admin">
-							<Admin />
-						</Route>
-					</Switch>
-				</div>
-			</Router>
+					<Routes>
+						<Route path="/" element={<Home />} />
+						<Route
+							path="/products/:id"
+							element={<ProductDetails />}
+						/>
+
+						<Route
+							path="/about"
+							element={
+								<About
+									productsList={productsList}
+									setProductsList={setProductsList}
+									setFilterdList={setFilterdList}
+								/>
+							}
+						/>
+						<Route path="/admin" element={<Admin />} />
+					</Routes>
+				</Router>
+			</div>
 		</ShopContext.Provider>
 	);
 }

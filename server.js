@@ -32,8 +32,11 @@ app.post('/api/products', (req, res) => {
 		rating,
 	}); //new obj and after save
 	product.save((err, product) => {
-		console.log('err', err);
-		res.send(product);
+		if (err) console.log('err', err);
+		else {
+			console.log('more 1 product');
+			res.send(product);
+		}
 	});
 });
 

@@ -32,9 +32,9 @@ function Home() {
 				<div style={{ padding: '15px 0 0 0' }}>
 					<SliderRange />
 				</div>
-				<div style={{ padding: '15px 0 0 0' }}>
+				{/* <div style={{ padding: '15px 0 0 0' }}>
 					<ColorTextFields />
-				</div>
+				</div> */}
 
 				<Box sx={{ minWidth: 150 }}>
 					<FormControl fullWidth>

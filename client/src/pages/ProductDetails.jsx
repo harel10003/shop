@@ -14,16 +14,16 @@ import Spinner from '../component/layout/Spinner';
 
 function ProductDetails() {
 	const [value, setValue] = useState(0);
-	const { _id } = useParams();
+	const { id } = useParams();
 	const [product, setProduct] = useState([]);
 	// const inputRef = useRef(null);
 	// if (inputRef && inputRef.current) inputRef.current.focus();
 
 	useEffect(() => {
-		fetch(`/api/products/${_id}`)
+		fetch(`/api/products/${id}`)
 			.then((res) => res.json())
 			.then((p) => setProduct(p));
-	}, [_id]);
+	}, [id]);
 
 	if (product.title === undefined) return <Spinner />;
 	else {

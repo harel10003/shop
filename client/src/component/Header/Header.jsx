@@ -16,17 +16,19 @@ import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import { useTheme } from '@mui/material/styles';
-import { withRouter } from 'react-router-dom';
+
 import { Drawer } from '@mui/material';
 import DrawerCart from '../drawer/DrawerCart';
 import { handleBreakpoints } from '@mui/system';
 import IconCart from '../cart/IconCart';
+import { useNavigate } from 'react-router-dom';
 
 const pages = ['Home', 'About', 'admin'];
 const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
 
 function Header(props) {
-	const { history } = props;
+	const nav = useNavigate();
+	// const { history } = props;
 	const [anchorElNav, setAnchorElNav] = useState(null);
 	const [anchorElUser, setAnchorElUser] = useState(null);
 	const theme = useTheme();
@@ -41,11 +43,11 @@ function Header(props) {
 
 	const handleMenuClick = (page) => {
 		if (page === 'About') {
-			history.push('about');
+			nav('/about');
 		} else if (page === 'admin') {
-			history.push('admin');
+			nav('/admin');
 		} else {
-			history.push('/');
+			nav('/');
 		}
 		setAnchorElNav(null);
 	};
@@ -225,4 +227,4 @@ function Header(props) {
 		</nav>
 	);
 }
-export default withRouter(Header);
+export default Header;

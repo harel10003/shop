@@ -6,17 +6,8 @@ import { Avatar, Stack } from '@mui/material';
 import * as React from 'react';
 import Badge from '@mui/material/Badge';
 import { styled } from '@mui/material/styles';
-import IconButton from '@mui/material/IconButton';
-import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
+
 import { useTheme } from '@mui/material/styles';
-import Box from '@mui/material/Box';
-import Card from '@mui/material/Card';
-import CardContent from '@mui/material/CardContent';
-import CardMedia from '@mui/material/CardMedia';
-import Typography from '@mui/material/Typography';
-import SkipPreviousIcon from '@mui/icons-material/SkipPrevious';
-import PlayArrowIcon from '@mui/icons-material/PlayArrow';
-import SkipNextIcon from '@mui/icons-material/SkipNext';
 
 const StyledBadge = styled(Badge)(({ theme }) => ({
 	'& .MuiBadge-badge': {
@@ -28,13 +19,9 @@ const StyledBadge = styled(Badge)(({ theme }) => ({
 }));
 
 function Cart() {
-	const theme = useTheme();
 	const {
 		cartList,
-
 		thisProduct,
-
-		TotalPrice,
 	} = useContext(ShopContext);
 
 	const cartIndex = cartList
