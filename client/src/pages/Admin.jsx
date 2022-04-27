@@ -1,6 +1,7 @@
 import { TextField } from '@mui/material';
 import { useContext } from 'react';
 import shopContext from '../component/context/ShopConetext';
+import GridData from '../component/GridData';
 
 function Admin() {
 	const { productsList, setProductsList, setFilterdList } =
@@ -39,29 +40,56 @@ function Admin() {
 			.then((res) => res.json())
 			.then((data) => setProductsList([data, ...productsList]));
 	};
-	const put = (id) => {
-		// fetch('/api/products/:id', {
-		// 	method: 'POST',
-		// 	headers: {
-		// 		Accept: 'application/json',
-		// 		'Content-Type': 'application/json',
-		// 	},
-		// 	body: JSON.stringify({
-		// 		title: newProduct.title,
-		// 		description: newProduct.description,
-		// 		category: newProduct.category,
-		// 		image: newProduct.image,
-		// 		price: newProduct.price,
-		// 		rating: {
-		// 			rate: newProduct.rating.rate,
-		// 			count: newProduct.rating.count,
-		// 		},
-		// 	}),
-		// })
-		// 	.then((res) => res.json())
-		// 	.then((data) => setProductsList([data, ...productsList]));
-	};
-	const deleted = (id) => {};
+
+	//לסדר שיקבל נתונים מלאים ונכונים וכמובן תצוגה
+	// const put = (id) => {
+	// 	fetch('/api/products/id', {
+	// 		method: 'PUT',
+	// 		headers: {
+	// 			Accept: 'application/json',
+	// 			'Content-Type': 'application/json',
+	// 		},
+	// 		body: JSON.stringify({
+	// 			title: 'test',
+	// 			description: newProduct.description,
+	// 			category: newProduct.category,
+	// 			image: newProduct.image,
+	// 			price: newProduct.price,
+	// 			rating: {
+	// 				rate: newProduct.rating.rate,
+	// 				count: newProduct.rating.count,
+	// 			},
+	// 		}),
+	// 	})
+	// 		.then((res) => res.json())
+	// 		.then((data) => setProductsList([data, ...productsList]));
+	// };
+	//הפעלת עריכה
+	// put('6242af254e92eb01c9ecd353');
+	// const deleted = (id) => {
+	// 	fetch(`/api/products/${id}`, {
+	// 		method: 'delete',
+	// 		headers: {
+	// 			Accept: 'application/json',
+	// 			'Content-Type': 'application/json',
+	// 		},
+	// 		body: JSON.stringify({
+	// 			title: 'test',
+	// 			description: newProduct.description,
+	// 			category: newProduct.category,
+	// 			image: newProduct.image,
+	// 			price: newProduct.price,
+	// 			rating: {
+	// 				rate: newProduct.rating.rate,
+	// 				count: newProduct.rating.count,
+	// 			},
+	// 		}),
+	// 	})
+	// 		.then((res) => res.json())
+	// 		.then((data) => setProductsList([data, ...productsList]));
+	// };
+	// הפעלת מחיקה
+	// deleted('6242af254e92eb01c9ecd353');
 
 	// const removeTodo = (id) => {
 	// 	setTodos(todos.filter((todo) => todo.id !== id));
@@ -116,6 +144,8 @@ function Admin() {
 			/>
 
 			<button onClick={() => post()}>add product</button>
+
+			<GridData />
 		</>
 	);
 }
