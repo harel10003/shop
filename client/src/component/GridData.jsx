@@ -2,30 +2,18 @@ import { DataGrid, GridRowParams } from '@mui/x-data-grid';
 import { useContext, useEffect, useState } from 'react';
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
+import { toast } from 'react-toastify';
 import {
 	DataGridPro,
 	GridActionsCellItem,
 	GRID_CHECKBOX_SELECTION_COL_DEF,
 } from '@mui/x-data-grid-pro';
-import { Alert } from '@mui/material';
+
 import shopContext from './context/ShopConetext';
+import { Alert } from '@mui/material';
 
 function GridData() {
-	const [products, setProducts] = useState([]);
-	const { productsList, setProductsList } = useContext(shopContext);
-
-	// const fetchData = async () => {
-	// 	try {
-	// 		const res = await fetch('/api/products');
-	// 		const data = await res.json();
-	// 		setProducts(data);
-	// 		console.log(data);
-	// 	} catch (err) {}
-	// };
-
-	// useEffect(() => {
-	// 	fetchData();
-	// }, []);
+	const { productsList, setFilterdList } = useContext(shopContext);
 
 	const rowData = productsList?.map((p, index) => {
 		// const rowData = products?.map((p, index) => {
@@ -41,11 +29,27 @@ function GridData() {
 	});
 
 	const columns = [
-		{ field: 'title', headerName: 'Title', width: 180, editable: true },
-		{ field: 'description', headerName: 'Description', editable: true },
-		{ field: 'category', headerName: 'Category', editable: true },
+		{ field: 'title', headerName: 'Title', width: 250, editable: true },
+		{
+			field: 'description',
+			headerName: 'Description',
+			width: 200,
+			editable: true,
+		},
+		{
+			field: 'category',
+			headerName: 'Category',
+			width: 150,
+			editable: true,
+		},
 		{ field: 'image', headerName: 'Image', editable: true },
 		{ field: 'price', headerName: 'Price', type: 'number', editable: true },
+		// {
+		// 	field: 'rating.rate',
+		// 	headerName: 'rating.rate',
+		// 	type: 'number',
+		// 	editable: true,
+		// },
 		{
 			field: 'actions',
 			headerName: 'Actions',
@@ -69,6 +73,7 @@ function GridData() {
 							params.row.category,
 							params.row.image,
 							params.row.price,
+							// params.row.rating.rate,
 							params.row.index
 						)
 					}
@@ -89,7 +94,7 @@ function GridData() {
 		};
 		let tempArr = productsList;
 		tempArr[index] = temp;
-		setProductsList([...tempArr]);
+		setFilterdList([...tempArr]);
 		fetch(`/api/products/${id}`, {
 			method: 'put',
 			headers: {
@@ -110,11 +115,10 @@ function GridData() {
 		})
 			.then((res) => res.json())
 			.then((data) => alert('ok'));
-		// debugger;
+		// .then((data) => toast.success('ok'));
 	};
 
 	const deleted = (id, index) => {
-		debugger;
 		fetch(`/api/products/${id}`, {
 			method: 'delete',
 			headers: {
@@ -122,11 +126,13 @@ function GridData() {
 				'Content-Type': 'application/json',
 			},
 		});
-		alert(`${id} is clear`);
 
 		let temp = productsList;
 		temp.splice(index, 1);
-		setProductsList([...temp]);
+		setFilterdList([...temp]);
+		toast.success(`${id} is clear`);
+		<Alert severity="success">{id} is clear</Alert>;
+		alert(`${id} is clear`);
 	};
 
 	return (

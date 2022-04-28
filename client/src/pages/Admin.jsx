@@ -1,4 +1,5 @@
-import { TextField } from '@mui/material';
+import { Button, TextField } from '@mui/material';
+import Box from '@mui/material/Box';
 import { useContext } from 'react';
 import shopContext from '../component/context/ShopConetext';
 import GridData from '../component/GridData';
@@ -38,7 +39,7 @@ function Admin() {
 			}),
 		})
 			.then((res) => res.json())
-			.then((data) => setProductsList([data, ...productsList]));
+			.then((data) => setFilterdList([data, ...productsList]));
 	};
 
 	//לסדר שיקבל נתונים מלאים ונכונים וכמובן תצוגה
@@ -106,45 +107,97 @@ function Admin() {
 	// title, description, category, image, price, rating
 	return (
 		<>
-			<div>new product</div>
-			<TextField
-				onChange={(e) => (newProduct.title = e.target.value)}
-				labal="New title"
-				placeholder="New title"
-			/>
-			<TextField
-				onChange={(e) => (newProduct.description = e.target.value)}
-				labal="New description"
-				placeholder="New description"
-			/>
-			<TextField
-				onChange={(e) => (newProduct.category = e.target.value)}
-				labal="New category"
-				placeholder="New category"
-			/>
-			<TextField
-				onChange={(e) => (newProduct.image = e.target.value)}
-				labal="New image"
-				placeholder="New image"
-			/>
-			<TextField
-				onChange={(e) => (newProduct.price = e.target.value)}
-				labal="New price"
-				placeholder="New price"
-			/>
-			<TextField
-				onChange={(e) => (newProduct.rating.rate = e.target.value)}
-				labal="New rate"
-				placeholder="New rate"
-			/>
-			<TextField
-				onChange={(e) => (newProduct.rating.count = e.target.value)}
-				labal="New count"
-				placeholder="New count"
-			/>
-
-			<button onClick={() => post()}>add product</button>
-
+			<div style={{ margin: ' 10px 0', fontSize: 25 }}>New product</div>
+			<Box
+				component="form"
+				sx={{
+					'& .MuiTextField-root': { m: 1, width: '25ch' },
+				}}
+				noValidate
+				autoComplete="off"
+				style={{
+					display: 'flex',
+					flexWrap: 'wrap',
+					justifyContent: 'center',
+				}}
+			>
+				<div>
+					<TextField
+						onChange={(e) => (newProduct.title = e.target.value)}
+						labal="New title"
+						placeholder="New title"
+						required
+						id="outlined-required"
+						label="New title"
+					/>
+					<TextField
+						onChange={(e) =>
+							(newProduct.description = e.target.value)
+						}
+						labal="New description"
+						placeholder="New description"
+						required
+						id="outlined-required"
+						label="New description"
+					/>
+				</div>
+				<div>
+					<TextField
+						onChange={(e) => (newProduct.category = e.target.value)}
+						labal="New category"
+						placeholder="New category"
+						required
+						id="outlined-required"
+						label="New category"
+					/>
+					<TextField
+						onChange={(e) => (newProduct.image = e.target.value)}
+						labal="New image"
+						placeholder="New image"
+						required
+						id="outlined-required"
+						label="New image"
+					/>
+				</div>
+				<div>
+					<TextField
+						onChange={(e) => (newProduct.price = e.target.value)}
+						labal="New price"
+						placeholder="New price"
+						required
+						id="outlined-required"
+						label="New price"
+					/>
+					{/* <TextField
+						onChange={(e) =>
+							(newProduct.rating.rate = e.target.value)
+						}
+						labal="New rate"
+						placeholder="New rate"
+						required
+						id="outlined-required"
+						label="New title"
+					/> */}
+					{/* <TextField
+						onChange={(e) =>
+							(newProduct.rating.count = e.target.value)
+						}
+						labal="New count"
+						placeholder="New count"
+						required
+						id="outlined-required"
+						label="New title"
+					/> */}
+					<Button
+						variant="contained"
+						style={{ margin: '10px 20px', padding: '12px 50px' }}
+						onClick={() => post()}
+					>
+						Add Product
+					</Button>
+				</div>
+			</Box>
+			<div style={{ margin: ' 10px 0', fontSize: 25 }}>Edit Product</div>
 			<GridData />
 		</>
 	);
