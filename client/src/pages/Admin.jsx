@@ -3,7 +3,7 @@ import Box from '@mui/material/Box';
 import { useContext } from 'react';
 import shopContext from '../component/context/ShopConetext';
 import GridData from '../component/admin/GridData';
-import New from '../component/admin/New';
+// import New from '../component/admin/New';
 
 function Admin() {
 	const { productsList, setProductsList, setFilterdList } =
