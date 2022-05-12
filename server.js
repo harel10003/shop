@@ -148,7 +148,7 @@ const { DB_USER, DB_PASS, DB_HOST, DB_NAME } = process.env;
 mongoose.connect(
 	// 'mongodb://localhost/products_shop', //locally
 	`mongodb+srv://${DB_USER}:${DB_PASS}@${DB_HOST}/${DB_NAME}?retryWrites=true&w=majority`,
-	{ useNewUrlParser: true, useUnifiedTopology: true },
+	// { useNewUrlParser: true, useUnifiedTopology: true },
 	(err) => {
 		if (err) return console.log(err);
 	},

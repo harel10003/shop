@@ -19,18 +19,21 @@ function App() {
 	useEffect(() => {
 		setProductsList([]);
 		// inputRef.current.focus();
-		fetch('/api/products')
-			.then((res) => {
-				return res.json();
-			})
+		fetch('api/products')
+			.then((res) => res.json())
 			.then((products) => {
+				console.log(products);
 				setProductsList(products);
 				setFilterdList(products);
-				// PriceCheck();
+				// PriceCheck(products);
 			});
 	}, []);
 	//רשימה מסוננת של המחירים לצורך הסינון
-	const arrsort = productsList.map((p) => p.price).sort();
+	const arrsort = () => {
+		productsList.map((p) => p.price).sort();
+	};
+	// setMinPrice(arrsort[0]);
+	// setMaxPrice(arrsort(arrsort.length - 1));
 
 	// const [maxP, setMaxP] = useState(10000);
 	// const [minP, setMinP] = useState(0);
@@ -51,11 +54,38 @@ function App() {
 
 	const [val, setVal] = useState([minPrice, maxPrice]);
 	const updataRange = (e, data) => {
-		setVal(data);
-		setMinPrice(arrsort[0]);
-		setMaxPrice(arrsort[arrsort.length - 1]);
-		// setMinPrice(val[0]);
-		// setMaxPrice(val[1]);
+		let arrsort = productsList
+			.map((p) => p.price)
+			.sort(function (a, b) {
+				return a - b;
+			});
+		let num1;
+		let num2;
+		let i = 0,
+			x = 0;
+		console.log(arrsort);
+		while (data[0] > arrsort[i]) {
+			i++;
+			console.log(arrsort[i]);
+		}
+		while (data[1] > arrsort[x]) {
+			x++;
+			console.log(arrsort[x]);
+		}
+		console.log(data[0], ' i: ', i, data[1], ' x: ', x);
+		if (i < x - 1) {
+			num1 = data[0];
+			num2 = data[1];
+		} else {
+			num1 = data[0];
+			num2 = arrsort[i + 1];
+		}
+		// debugger;
+		setVal([num1, num2]);
+		// setMinPrice(arrsort[0]);
+		// setMaxPrice(arrsort[arrsort.length - 1]);
+		setMinPrice(num1);
+		setMaxPrice(num2);
 		filterCategory(catgoryNow);
 	};
 	const [catgoryNow, setCatgoryNow] = useState('all');
@@ -78,18 +108,12 @@ function App() {
 			);
 		}
 	};
-
-	// const PriceCheck = () => {
-	// 	productsList.forEach((p) => {
-	// 		if (maxP <= p.price) {
-	// 			setMaxP(p.price);
-	// 		}
-	// 		if (minP >= p.price) {
-	// 			setMinP(p.price);
-	// 		}
-	// 	});
+	// let sortArr;
+	// const PriceCheck = (arr) => {
+	// 	let arr1 = arr.map((p) => p.price).sort();
+	// 	console.log(arr1);
+	// 	return (sortArr = arr1);
 	// };
-
 	const includesStr = (str) =>
 		productsList.filter((p) => p.title.toLowerCase().includes(str));
 	const thisProduct = (_id) => productsList.filter((p) => p._id === _id)[0];
