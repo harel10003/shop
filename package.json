@@ -1,4 +1,5 @@
 {
+	"homepage": "htt://harel10003.github.io/shop",
 	"name": "shop-server",
 	"version": "1.0.0",
 	"description": "",
@@ -7,7 +8,8 @@
 		"start": "node server.js",
 		"heroku-postbuild": "cd client && npm i && npm run build",
 		"test": "echo \"Error: no test specified\" && exit 1",
-		"dev": "concurrently \"nodemon server.js\" \"cd client && npm start\""
+		"dev": "concurrently \"nodemon server.js\" \"cd client && npm start\"",
+		"deploy": "concurrently \"nodemon server.js\" \"cd client && gh-pages -d build\"     "
 	},
 	"keywords": [],
 	"author": "",
@@ -25,6 +27,7 @@
 	},
 	"devDependencies": {
 		"concurrently": "^7.0.0",
-		"webpack-cli": "^4.9.2"
+		"webpack-cli": "^4.9.2",
+		"gh-pages": "^4.0.0"
 	}
 }

@@ -1,5 +1,4 @@
 {
-	"homepage": "htt://harel10003.github.io/shop",
 	"name": "gocode-shop",
 	"version": "0.1.0",
 	"private": true,
@@ -28,8 +27,7 @@
 		"start": "react-scripts start --expose-gc --max_old_space_size=12000 start",
 		"build": "react-scripts build",
 		"test": "react-scripts test",
-		"eject": "react-scripts eject",
-		"deploy": "gh-pages -d build"
+		"eject": "react-scripts eject"
 	},
 	"eslintConfig": {
 		"extends": [
@@ -48,8 +46,5 @@
 			"last 1 safari version"
 		]
 	},
-	"proxy": "http://localhost:3000/",
-	"devDependencies": {
-		"gh-pages": "^4.0.0"
-	}
+	"proxy": "http://localhost:3000/"
 }
