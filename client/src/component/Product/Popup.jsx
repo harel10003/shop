@@ -5,6 +5,7 @@ import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
 import { CardMedia } from '@mui/material';
 import { Description } from '@mui/icons-material';
+import EditIcon from '@mui/icons-material/Edit';
 
 const style = {
 	position: 'absolute',
@@ -19,22 +20,40 @@ const style = {
 	p: 4,
 };
 
-function Popup({ _id, image, title }) {
+function Popup({
+	_id,
+	image,
+	title,
+	description,
+	category,
+	price,
+	editor,
+	update,
+	index,
+}) {
 	const [open, setOpen] = React.useState(false);
 	const handleOpen = () => setOpen(true);
 	const handleClose = () => setOpen(false);
 
 	return (
 		<div>
-			<Button onClick={handleOpen}>
+			<div onClick={handleOpen}>
 				{' '}
-				<CardMedia
-					component="img"
-					height="320"
-					image={image}
-					alt={title}
-				/>
-			</Button>
+				{editor == 'true' ? (
+					<EditIcon />
+				) : (
+					<CardMedia
+						component="img"
+						height="320"
+						image={image}
+						alt={title}
+						description={description}
+						category={category}
+						price={price}
+						editor={editor}
+					/>
+				)}
+			</div>
 			<Modal
 				open={open}
 				onClose={handleClose}
@@ -44,12 +63,33 @@ function Popup({ _id, image, title }) {
 				<Box sx={style}>
 					<Typography
 						_id="modal-modal-title"
-						variant="h6"
-						component="h2"
+						variant={editor == 'true' ? '15px' : 'h6'}
+						component="h3"
 					>
-						<img src={image} alt={title} width="300" />
+						<img
+							src={image}
+							alt={title}
+							width={editor == 'true' ? '100' : '300'}
+						/>
 						<br />
 						{title}
+						<br />
+						<br />
+						<div
+							style={{
+								display: editor == 'true' ? 'inline' : 'none',
+							}}
+						>
+							{`category:  ${category} `}
+							<br />
+							<br />
+							{`price: ${price} `}
+							<br />
+							<br />
+							{`description: ${description} `}
+						</div>
+						{/* : ''
+						} */}
 					</Typography>
 					<Typography
 						_id="modal-modal-description"
@@ -72,6 +112,33 @@ function Popup({ _id, image, title }) {
 					>
 						x
 					</button>
+
+					{editor == 'true' ? (
+						<Button
+							variant="contained"
+							style={{
+								margin: '10px 20px',
+								padding: '12px 50px',
+							}}
+							onClick={() => {
+								update(
+									_id,
+									title,
+									description,
+									category,
+									image,
+									price,
+									// params.row.rating.rate,
+									index
+								);
+								handleClose();
+							}}
+						>
+							save the change
+						</Button>
+					) : (
+						''
+					)}
 				</Box>
 			</Modal>
 		</div>

@@ -2,7 +2,8 @@ import { Button, TextField } from '@mui/material';
 import Box from '@mui/material/Box';
 import { useContext } from 'react';
 import shopContext from '../component/context/ShopConetext';
-import GridData from '../component/GridData';
+import GridData from '../component/admin/GridData';
+import New from '../component/admin/New';
 
 function Admin() {
 	const { productsList, setProductsList, setFilterdList } =
@@ -199,6 +200,7 @@ function Admin() {
 			</Box>
 			<div style={{ margin: ' 10px 0', fontSize: 25 }}>Edit Product</div>
 			<GridData />
+			{/* <New /> */}
 		</>
 	);
 }

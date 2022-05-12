@@ -1,5 +1,6 @@
 import Products from '../component/Products/Products';
 import SliderRange from '../component/Header/SliderRange';
+import NewSlider from '../component/Header/NewSlider';
 import ShopContext from '../component/context/ShopConetext';
 import * as React from 'react';
 import Box from '@mui/material/Box';

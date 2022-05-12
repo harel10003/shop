@@ -33,7 +33,7 @@ function Product({ image, title, price, _id }) {
 					alt={title}
 				
 				/> */}
-				<Popup _id={_id} image={image} title={title} />
+				<Popup _id={_id} image={image} title={title} editor="false" />
 				<CardContent>
 					<Typography
 						gutterBottom
