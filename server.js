@@ -20,6 +20,12 @@ const productSchema = new mongoose.Schema({
 });
 const Product = mongoose.model('Product', productSchema);
 
+app.all('/*', function (req, res, next) {
+	res.header('Access-Control-Allow-Origin', '*');
+	res.header('Access-Control-Allow-Headers', 'X-Requseted-With');
+	next();
+});
+
 //create new product
 app.post('/api/products', (req, res) => {
 	const { title, description, category, image, price, rating } = req.body; //recived from the web
