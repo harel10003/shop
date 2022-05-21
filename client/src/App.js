@@ -9,6 +9,7 @@ import Admin from './pages/Admin';
 
 // import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { localFetch } from './fetch';
 function App() {
 	const [minPrice, setMinPrice] = useState(0);
 	const [maxPrice, setMaxPrice] = useState(2000);
@@ -19,14 +20,18 @@ function App() {
 	useEffect(() => {
 		setProductsList([]);
 		// inputRef.current.focus();
-		fetch('api/products')
-			.then((res) => res.json())
-			.then((products) => {
-				console.log(products);
-				setProductsList(products);
-				setFilterdList(products);
-				// PriceCheck(products);
-			});
+		try {
+			localFetch('api/products')
+				.then((res) => res.json())
+				.then((products) => {
+					console.log(products);
+					setProductsList(products);
+					setFilterdList(products);
+					// PriceCheck(products);
+				});
+		} catch (e) {
+			console.log(e);
+		}
 	}, []);
 	//רשימה מסוננת של המחירים לצורך הסינון
 	const arrsort = () => {

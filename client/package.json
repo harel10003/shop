@@ -24,7 +24,7 @@
 		"styled-components": "^5.3.3"
 	},
 	"scripts": {
-		"start": "react-scripts start --expose-gc --max_old_space_size=12000 start",
+		"start": "react-scripts start ",
 		"build": "react-scripts build",
 		"test": "react-scripts test",
 		"eject": "react-scripts eject"
@@ -45,6 +45,5 @@
 			"last 1 firefox version",
 			"last 1 safari version"
 		]
-	},
-	"proxy": "http://localhost:3000/"
+	}
 }
